@@ -1,32 +1,17 @@
-name: .NET Core
+name: Update packages
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 0 * * 0'
 
 jobs:
-  build:
-
+  update:
     runs-on: ubuntu-latest
-
+    name: Update dependencies
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-    - name: NuKeeper Action
-      # You may pin to the exact commit or the version.
-      # uses: NuKeeperDotNet/NuKeeper-Action@cb26093619556925890e052ef3df94b64684c41c
-      uses: NuKeeperDotNet/NuKeeper-Action@0.1
-      with:
+      - name: Nukeeper
+        id: nukeeper
+        uses: nukeeperdotnet/nukeeper-action@0.1
+        with:
           token: "${{ secrets.NUKEEPER_TOKEN }}"
-    
