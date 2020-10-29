@@ -24,9 +24,8 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Nukeeper
-      id: nukeeper
-      uses: nukeeperdotnet/nukeeper-action@0.1
+    - name: update packages
+      uses: bchir/nuget-update@V1.0.0
       with:
-        token: "${{ secrets.NUKEEPER_TOKEN }}"
-        repository: abierhaus/azure-image-rekognition.git
+        searchFor: 'outdated'
+        versionToSelect: 'latest'
