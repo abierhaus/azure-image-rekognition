@@ -25,7 +25,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: update packages
-      uses: abierhaus/azure-image-rekognition
+      uses: abierhaus/azure-image-rekognition@V1.0.0
       with:
         searchFor: 'outdated'
         versionToSelect: 'latest'
